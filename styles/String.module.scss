@@ -1,4 +1,10 @@
+@import "common";
+
 .string {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+
+  @include respond-to("small") {
+    flex-direction: row;
+  }
 }

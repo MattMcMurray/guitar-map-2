@@ -1,0 +1,9 @@
+@import 'common';
+
+.fretboard {
+  display: flex;
+
+  @include respond-to("small") {
+    flex-direction: column;
+  }
+}
