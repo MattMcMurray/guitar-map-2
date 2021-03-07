@@ -1,0 +1,1 @@
+export const NUM_FRETS = 21;
