@@ -1,9 +1,13 @@
 import { Notes } from "@/model/Note";
 import React, { createContext, useContext, useReducer } from "react";
 
-enum ActionType {}
+enum ActionType {
+  UPDATE_HIGHLIGHTED_NOTES,
+}
 
-export type Payload = {};
+export type Payload = {
+  highlightedNotes?: Notes[];
+};
 
 export type Action = {
   type: ActionType;
@@ -21,6 +25,7 @@ interface Tuning {
 
 interface State {
   tuning: Tuning;
+  highlightedNotes: Notes[];
 }
 
 const initialState: State = {
@@ -32,6 +37,7 @@ const initialState: State = {
     string5: Notes.A,
     string6: Notes.E,
   },
+  highlightedNotes: [],
 };
 
 type Dispatch = (action: Action) => void;
@@ -42,6 +48,12 @@ function appReducer(state: State, action: Action): State {
   const { type, payload } = action;
 
   switch (type) {
+    case ActionType.UPDATE_HIGHLIGHTED_NOTES:
+      return {
+        ...state,
+        highlightedNotes: payload.highlightedNotes,
+      };
+      
     default:
       return state;
   }
@@ -78,9 +90,4 @@ function useMapDispatch() {
   return context;
 }
 
-export {
-  ActionType,
-  MapProvider,
-  useMapState,
-  useMapDispatch,
-};
+export { ActionType, MapProvider, useMapState, useMapDispatch };
