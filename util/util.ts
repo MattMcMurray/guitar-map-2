@@ -8,14 +8,11 @@ import { FLAT, Notes, NUM_NOTES, SHARP } from "model/Note";
  * @param semitoneOffset the number of semitones to add to the baseNote
  * @returns {Notes} the result of the sum
  */
-export const calculateNoteSum = (
-  baseNote: Notes,
-  semitoneOffset: number
-): Notes => {
+const calculateNoteSum = (baseNote: Notes, semitoneOffset: number): Notes => {
   return (baseNote + semitoneOffset) % NUM_NOTES;
 };
 
-export const convertInputToMusicalSymbol = (input: string): string => {
+const convertInputToMusicalSymbol = (input: string): string => {
   let normalizedInput = input.trim();
 
   if (normalizedInput.length === 2) {
@@ -31,7 +28,7 @@ export const convertInputToMusicalSymbol = (input: string): string => {
   return normalizedInput;
 };
 
-export const convertStringToNote = (note: string): Notes => {
+const convertStringToNote = (note: string): Notes => {
   const normalizedNote = convertInputToMusicalSymbol(note).toUpperCase();
 
   switch (normalizedNote) {
@@ -75,4 +72,46 @@ export const convertStringToNote = (note: string): Notes => {
         `${note} (normalized to: ${normalizedNote}) is invalid input`
       );
   }
+};
+
+const convertNoteToString = (
+  note: Notes,
+  useSharp: boolean = false
+): string => {
+  switch (note) {
+    case Notes.A:
+      return "A";
+    case Notes.A_SHARP_B_FLAT:
+      return useSharp ? `A${SHARP}` : `B${FLAT}`;
+    case Notes.B:
+      return "B";
+    case Notes.C:
+      return "C";
+    case Notes.C_SHARP_D_FLAT:
+      return useSharp ? `C${SHARP}` : `D${FLAT}`;
+    case Notes.D:
+      return "D";
+    case Notes.D_SHARP_E_FLAT:
+      return useSharp ? `D${SHARP}` : `E${FLAT}`;
+    case Notes.E:
+      return "E";
+    case Notes.F:
+      return "F";
+    case Notes.F_SHARP_G_FLAT:
+      return useSharp ? `F${SHARP}` : `G${FLAT}`;
+    case Notes.G:
+      return "G";
+    case Notes.G_SHARP_A_FLAT:
+      return useSharp ? `G${SHARP}` : `A${FLAT}`;
+
+    default:
+      break;
+  }
+};
+
+export {
+  calculateNoteSum,
+  convertInputToMusicalSymbol,
+  convertStringToNote,
+  convertNoteToString,
 };

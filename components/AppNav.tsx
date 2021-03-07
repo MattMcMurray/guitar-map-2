@@ -1,6 +1,6 @@
 import React from "react";
 import { AppBar, Toolbar, Typography } from "@material-ui/core";
-import styles from "styles/AppNav.module.scss";
+import styles from "@/styles/AppNav.module.scss";
 
 interface Props {}
 

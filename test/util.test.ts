@@ -1,7 +1,8 @@
-import { FLAT, Notes } from "model/Note";
+import { FLAT, Notes, SHARP } from "model/Note";
 import {
   calculateNoteSum,
   convertInputToMusicalSymbol,
+  convertNoteToString,
   convertStringToNote,
 } from "util/util";
 
@@ -65,7 +66,37 @@ describe("Test convertStringToNote", () => {
     expect(convertStringToNote(`a${FLAT}`)).toEqual(Notes.G_SHARP_A_FLAT);
   });
 
-  it('should throw an error on invalid input', () => {
-    expect(() => convertStringToNote('foo')).toThrow('foo (normalized to: FOO) is invalid input')
-  })
+  it("should throw an error on invalid input", () => {
+    expect(() => convertStringToNote("foo")).toThrow(
+      "foo (normalized to: FOO) is invalid input"
+    );
+  });
+});
+
+describe("Test convertNoteToString", () => {
+  it("should convert the natural notes to a human readable string", () => {
+    expect(convertNoteToString(Notes.A)).toEqual("A");
+    expect(convertNoteToString(Notes.B)).toEqual("B");
+    expect(convertNoteToString(Notes.C)).toEqual("C");
+    expect(convertNoteToString(Notes.D)).toEqual("D");
+    expect(convertNoteToString(Notes.E)).toEqual("E");
+    expect(convertNoteToString(Notes.F)).toEqual("F");
+    expect(convertNoteToString(Notes.G)).toEqual("G");
+  });
+
+  it("should convert accidentals to flat by default", () => {
+    expect(convertNoteToString(Notes.A_SHARP_B_FLAT)).toEqual(`B${FLAT}`);
+    expect(convertNoteToString(Notes.C_SHARP_D_FLAT)).toEqual(`D${FLAT}`);
+    expect(convertNoteToString(Notes.D_SHARP_E_FLAT)).toEqual(`E${FLAT}`);
+    expect(convertNoteToString(Notes.F_SHARP_G_FLAT)).toEqual(`G${FLAT}`);
+    expect(convertNoteToString(Notes.G_SHARP_A_FLAT)).toEqual(`A${FLAT}`);
+  });
+
+it("should convert accidentals to sharp when passed the boolean flag", () => {
+    expect(convertNoteToString(Notes.A_SHARP_B_FLAT, true)).toEqual(`A${SHARP}`);
+    expect(convertNoteToString(Notes.C_SHARP_D_FLAT, true)).toEqual(`C${SHARP}`);
+    expect(convertNoteToString(Notes.D_SHARP_E_FLAT, true)).toEqual(`D${SHARP}`);
+    expect(convertNoteToString(Notes.F_SHARP_G_FLAT, true)).toEqual(`F${SHARP}`);
+    expect(convertNoteToString(Notes.G_SHARP_A_FLAT, true)).toEqual(`G${SHARP}`);
+  });
 });

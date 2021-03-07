@@ -9,10 +9,10 @@ function Fretboard(props: Props) {
   return (
     <>
       <String baseNote="E" />
-      <String baseNote="E" />
-      <String baseNote="E" />
-      <String baseNote="E" />
-      <String baseNote="E" />
+      <String baseNote="B" />
+      <String baseNote="G" />
+      <String baseNote="D" />
+      <String baseNote="A" />
       <String baseNote="E" />
     </>
   );
